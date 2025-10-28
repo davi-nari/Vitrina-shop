@@ -1,3 +1,5 @@
+<script setup></script>
+
 <template>
   <div class="container">
     <section class="banner">
@@ -8,8 +10,6 @@
     </section>
   </div>
 </template>
-
-<script setup></script>
 
 <style lang="scss" scoped>
 .banner {

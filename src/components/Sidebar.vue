@@ -1,43 +1,68 @@
 <template>
-  <aside class="filters">
-    <h3 class="filters__title">Фильтры</h3>
+  <!-- Оверлей только на мобилке, клик = закрыть -->
+  <div
+    class="filters-backdrop"
+    v-if="ui.isFiltersOpen"
+    @click="ui.closeFilters"
+  ></div>
+
+  <aside class="filters" :class="{ open: ui.isFiltersOpen }">
+    <h3 class="filters__title">
+      Фильтры
+      <button
+        title="Сбросить фильтры"
+        class="main__btn"
+        type="button"
+        @click="store.resetFilters()"
+      >
+        Сбросить
+      </button>
+    </h3>
+
     <div class="filters__sex">
       <h4 class="filters__title">Пол</h4>
       <div class="filters__btns">
         <button
           class="filters__button"
-          @click="onFilterBySex(item.sex)"
-          v-for="item in sex_filters"
-          :key="item.sex"
-          :class="{ active: selectedSex === item.sex }"
+          v-for="item in store.uniqueGenders"
+          :key="item.val"
+          @click="filterBySex(item.val)"
+          :class="{ active: store.gender === item.val }"
+          type="button"
         >
           {{ item.key }}
         </button>
       </div>
     </div>
-    <!-- <div class="filters__range">
-      <label class="filters__title">Ценовой диапазон</label>
-      <div ref="sliderEl" style="margin: 12px 0"></div>
-      <div>{{ price[0] }}₽ — {{ price[1] }}₽</div>
-    </div> -->
+
     <div class="filters__size">
       <h4 class="filters__title">Размер</h4>
       <div class="filters__btns">
         <button
           class="filters__button"
-          v-for="item in store.sizes"
+          v-for="item in store.uniqueSizes"
           :key="item"
           @click="onFilterBySize(item)"
+          :class="{ active: store.size === item }"
+          type="button"
         >
           {{ item }}
         </button>
       </div>
     </div>
+
     <div class="filters__colors">
       <h4 class="filters__title">Цвет</h4>
       <div class="filters__btns">
-        <button class="filters__colors-item">
-          <span>
+        <button
+          class="filters__colors-item"
+          v-for="item in store.uniqueColors"
+          :key="item"
+          @click="filterByColor(item)"
+          :class="{ active: store.color === item }"
+          type="button"
+        >
+          <span :style="{ background: item }">
             <svg
               width="12"
               height="10"
@@ -47,45 +72,7 @@
             >
               <path
                 d="M0.46875 3.97664L2.36659 5.87448L7.11118 1.12988"
-                stroke="white"
-                stroke-width="0.948919"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </span>
-        </button>
-        <button class="filters__colors-item">
-          <span>
-            <svg
-              width="12"
-              height="10"
-              viewBox="0 0 8 7"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M0.46875 3.97664L2.36659 5.87448L7.11118 1.12988"
-                stroke="white"
-                stroke-width="0.948919"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </span>
-        </button>
-        <button class="filters__colors-item">
-          <span>
-            <svg
-              width="12"
-              height="10"
-              viewBox="0 0 8 7"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M0.46875 3.97664L2.36659 5.87448L7.11118 1.12988"
-                stroke="white"
+                :stroke="item"
                 stroke-width="0.948919"
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -99,59 +86,21 @@
 </template>
 
 <script setup>
-import noUiSlider from "nouislider";
-
-import { ref, reactive, onMounted, onBeforeUnmount } from "vue";
-import { useFetchProductsStore } from "@/store/fetchProducts";
+import { useFetchProductsStore } from "@/store/products";
+import { useUI } from "@/store/ui";
 
 const store = useFetchProductsStore();
+const ui = useUI();
 
-const sex_filters = reactive([
-  { sex: "m", key: "Мужской" },
-  { sex: "w", key: "Женский" },
-  { sex: "uni", key: "Унисекс" },
-]);
-
-const sliderEl = ref(null);
-
-const selectedSex = ref(null);
-
-const onFilterBySex = (param) => {
-  store.filterBySex(param);
-  selectedSex.value = param;
+const onFilterBySize = (selectedSize) => {
+  store.size = store.size === selectedSize ? null : selectedSize;
 };
-
-const onFilterBySize = (val) => {
-  store.setSize(val);
+const filterBySex = (selectedGender) => {
+  store.gender = store.gender === selectedGender ? null : selectedGender;
 };
-
-const colors = store.products?.forEach((item) => {
-  item.color_code;
-});
-
-console.log(colors);
-
-// const price = ref([1161, 11042]);
-
-// onMounted(() => {
-//   noUiSlider.create(sliderEl.value, {
-//     start: price.value,
-//     connect: true,
-//     step: 200,
-//     range: { min: 1161, max: 11042 },
-//   });
-
-//   sliderEl.value.noUiSlider.on("change", (values) => {
-//     price.value = values.map((v) =>
-//       Math.round(parseFloat(String(v).replace(/\s/g, "")))
-//     );
-//     console.log(price.value);
-//   });
-// });
-
-// onBeforeUnmount(() => {
-//   sliderEl.value?.noUiSlider?.destroy();
-// });
+const filterByColor = (selectedColor) => {
+  store.color = store.color === selectedColor ? null : selectedColor;
+};
 </script>
 
 <style lang="scss">
@@ -159,13 +108,35 @@ console.log(colors);
   display: flex;
   flex-direction: column;
   gap: 32px;
-  max-width: 275px;
+  max-width: 188px;
+  width: 100%;
+
+  @media (max-width: 768px) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: min(88vw, 320px);
+    max-width: 88vw;
+    padding: 24px 16px;
+    background: #fff;
+    border-right: 1px solid #eaeaea;
+    transform: translateX(-100%);
+    transition: transform 0.28s ease;
+    z-index: 1100; /* выше bottom-nav */
+    overflow-y: auto;
+
+    &.open {
+      transform: translateX(0);
+    }
+  }
+
   &__sex {
     .filters__button {
       padding: 8px 12px;
       &.active {
         background: #101010;
-        color: white;
+        color: #fff;
       }
     }
   }
@@ -189,10 +160,10 @@ console.log(colors);
       display: flex;
       justify-content: center;
       align-items: center;
-      background: white;
-
-      path {
-        stroke: #eff1fe;
+      background: #fff;
+      &:hover span {
+        width: 100%;
+        height: 100%;
       }
       span {
         display: flex;
@@ -200,8 +171,18 @@ console.log(colors);
         align-items: center;
         width: 65%;
         height: 65%;
-        background: red;
         border-radius: 50%;
+        transition: 0.25s;
+      }
+      &.active {
+        span {
+          width: 100%;
+          height: 100%;
+        }
+        path {
+          stroke: #eff1fe;
+          mix-blend-mode: difference;
+        }
       }
     }
   }
@@ -211,18 +192,28 @@ console.log(colors);
     color: #101010;
     font-size: 18px;
     margin-bottom: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 12px;
+    .main__btn {
+      padding: 8px 12px;
+    }
   }
   &__button {
-    background: white;
+    background: #fff;
     border-radius: 16px;
-    color: black;
+    color: #000;
     transition: 0.25s;
     align-items: center;
     border: 1px solid #c2c2c2;
     font-weight: 600;
-
     &:hover {
       border: 1px solid #101010;
+    }
+    &.active {
+      background: #101010;
+      color: #fff;
     }
   }
   .filters__btns {
@@ -231,6 +222,21 @@ console.log(colors);
     align-items: center;
     justify-content: start;
     flex-wrap: wrap;
+  }
+}
+
+/* затемнение под офф-канвас на мобилке */
+.filters-backdrop {
+  display: none;
+}
+@media (max-width: 768px) {
+  .filters-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(1px);
+    z-index: 1090;
   }
 }
 </style>

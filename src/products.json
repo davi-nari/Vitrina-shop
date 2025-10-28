@@ -9,7 +9,7 @@
     "sizes": ["S", "M", "L", "XL"],
     "color_code": "#C4C7CF",
     "img_url": "/products/card1.png",
-    "sex": "uni"
+    "sex": { "val": "uni", "key": "Унисекс" }
   },
   {
     "id": "P002",
@@ -21,7 +21,7 @@
     "sizes": ["M", "L", "XL"],
     "color_code": "#101010",
     "img_url": "/products/card2.png",
-    "sex": "m"
+    "sex": { "val": "m", "key": "Мужской" }
   },
   {
     "id": "P003",
@@ -33,7 +33,7 @@
     "sizes": ["S", "M", "L"],
     "color_code": "#665745",
     "img_url": "/products/card3.png",
-    "sex": "w"
+    "sex": { "val": "w", "key": "Женский" }
   },
   {
     "id": "P004",
@@ -45,7 +45,7 @@
     "sizes": ["40", "41", "42", "43", "44"],
     "color_code": "#E6E5E3",
     "img_url": "/products/card4.png",
-    "sex": "uni"
+    "sex": { "val": "uni", "key": "Унисекс" }
   },
   {
     "id": "P005",
@@ -57,7 +57,7 @@
     "sizes": ["S", "M", "L", "XL"],
     "color_code": "#153B5B",
     "img_url": "/products/card5.png",
-    "sex": "uni"
+    "sex": { "val": "uni", "key": "Унисекс" }
   },
   {
     "id": "P006",
@@ -69,7 +69,7 @@
     "sizes": ["M", "L", "XL"],
     "color_code": "#C4C7CF",
     "img_url": "/products/card6.png",
-    "sex": "uni"
+    "sex": { "val": "uni", "key": "Унисекс" }
   },
   {
     "id": "P007",
@@ -81,7 +81,7 @@
     "sizes": ["S", "M", "L"],
     "color_code": "#101010",
     "img_url": "/products/card7.png",
-    "sex": "m"
+    "sex": { "val": "m", "key": "Мужской" }
   },
   {
     "id": "P008",
@@ -93,7 +93,7 @@
     "sizes": ["39", "40", "41", "42", "43"],
     "color_code": "#C4C7CF",
     "img_url": "/products/card8.png",
-    "sex": "uni"
+    "sex": { "val": "uni", "key": "Унисекс" }
   },
   {
     "id": "P009",
@@ -105,7 +105,7 @@
     "sizes": ["S", "M", "L", "XL"],
     "color_code": "#153B5B",
     "img_url": "/products/card9.png",
-    "sex": "w"
+    "sex": { "val": "w", "key": "Женский" }
   },
   {
     "id": "P010",
@@ -117,7 +117,7 @@
     "sizes": ["S", "M", "L"],
     "color_code": "#C4C7CF",
     "img_url": "/products/card10.png",
-    "sex": "m"
+    "sex": { "val": "m", "key": "Мужской" }
   },
   {
     "id": "P011",
@@ -129,7 +129,7 @@
     "sizes": ["M", "L", "XL"],
     "color_code": "#101010",
     "img_url": "/products/card11.png",
-    "sex": "uni"
+    "sex": { "val": "uni", "key": "Унисекс" }
   },
   {
     "id": "P012",
@@ -141,7 +141,7 @@
     "sizes": ["S", "M", "L", "XL"],
     "color_code": "#C4C7CF",
     "img_url": "/products/card12.png",
-    "sex": "w"
+    "sex": { "val": "w", "key": "Женский" }
   },
   {
     "id": "P013",
@@ -153,7 +153,7 @@
     "sizes": ["M", "L", "XL"],
     "color_code": "#153B5B",
     "img_url": "/products/card13.png",
-    "sex": "w"
+    "sex": { "val": "w", "key": "Женский" }
   },
   {
     "id": "P014",
@@ -165,7 +165,7 @@
     "sizes": ["One Size"],
     "color_code": "#101010",
     "img_url": "/products/card14.png",
-    "sex": "uni"
+    "sex": { "val": "uni", "key": "Унисекс" }
   },
   {
     "id": "P015",
@@ -177,7 +177,7 @@
     "sizes": ["One Size"],
     "color_code": "#E6E5E3",
     "img_url": "/products/card15.png",
-    "sex": "w"
+    "sex": { "val": "w", "key": "Женский" }
   },
   {
     "id": "P016",
@@ -189,7 +189,7 @@
     "sizes": ["One Size"],
     "color_code": "#101010",
     "img_url": "/products/card16.png",
-    "sex": "m"
+    "sex": { "val": "m", "key": "Мужской" }
   },
   {
     "id": "P017",
@@ -201,7 +201,7 @@
     "sizes": ["One Size"],
     "color_code": "#665745",
     "img_url": "/products/card17.png",
-    "sex": "uni"
+    "sex": { "val": "uni", "key": "Унисекс" }
   },
   {
     "id": "P018",
@@ -213,7 +213,7 @@
     "sizes": ["39", "40", "41", "42", "43"],
     "color_code": "#E6E5E3",
     "img_url": "/products/card18.png",
-    "sex": "w"
+    "sex": { "val": "w", "key": "Женский" }
   },
   {
     "id": "P019",
@@ -225,7 +225,7 @@
     "sizes": ["40", "41", "42", "43", "44"],
     "color_code": "#101010",
     "img_url": "/products/card19.png",
-    "sex": "uni"
+    "sex": { "val": "uni", "key": "Унисекс" }
   },
   {
     "id": "P020",
@@ -237,6 +237,6 @@
     "sizes": ["36-39", "40-43", "44-46"],
     "color_code": "#E6E5E3",
     "img_url": "/products/card20.png",
-    "sex": "uni"
+    "sex": { "val": "uni", "key": "Унисекс" }
   }
 ]

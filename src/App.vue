@@ -1,17 +1,7 @@
 <template>
-  <header class="header">
-    <Nav />
-  </header>
-  <main class="main">
-    <Banner />
-    <Catalog />
-  </main>
+  <RouterView />
 </template>
 
-<script setup>
-import Nav from "@/components/Nav.vue";
-import Banner from "@/components/Banner.vue";
-import Catalog from "@/components/Catalog.vue";
-</script>
+<script setup></script>
 
 <style lang="scss" scoped></style>

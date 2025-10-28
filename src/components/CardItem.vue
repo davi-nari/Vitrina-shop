@@ -1,27 +1,37 @@
 <template>
-  <div class="card">
+  <div class="card outOfStock">
     <div class="card__img">
       <span>-{{ props.cardInfo.discount }}%</span>
-      <img :src="props.cardInfo.img_url" :alt="props.cardInfo.name" />
+      <img
+        loading="lazy"
+        :src="props.cardInfo.img_url"
+        :alt="props.cardInfo.name"
+      />
     </div>
     <h3 class="card__title">{{ props.cardInfo.name }}</h3>
     <h3 class="card__price card__title">
       {{ props.cardInfo.final_price }}₽ <span>{{ props.cardInfo.price }}₽</span>
     </h3>
     <div class="card__btns">
-      <button v-if="count > 0">-</button>
+      <button v-if="count > 0" @click="store.removeFromCart(props.cardInfo.id)">
+        -
+      </button>
       <span v-if="count > 0">{{ count }}</span>
-      <button @click="count++">+</button>
+      <button @click="store.addToCart(props.cardInfo)">+</button>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
-const count = ref(0);
+import { useCart } from "@/store/cart";
+const store = useCart();
+import { computed } from "vue";
+
 const props = defineProps({
   cardInfo: Object,
 });
+
+const count = computed(() => store.itemCount(props.cardInfo.id));
 </script>
 
 <style lang="scss">
@@ -29,7 +39,7 @@ const props = defineProps({
   display: flex;
   flex-direction: column;
   align-items: start;
-  gap: 12px;
+  gap: 8px;
 
   &__img {
     background: white;
